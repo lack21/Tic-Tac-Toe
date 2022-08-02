@@ -163,6 +163,7 @@ while running:
 
     x, y = pygame.mouse.get_pos()
 
+    # Sound
     click_sound = pygame.mixer.Sound("TTT_sound.wav")
     Win_sound = pygame.mixer.Sound("TTT_win.wav")
 
