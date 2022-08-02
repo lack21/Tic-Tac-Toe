@@ -1,0 +1,356 @@
+# lear
+# Tic Tac Toe
+
+# Welcome to the Tic Tac Toe game
+# This game is made in pygame
+
+import pygame
+import random as rd
+
+pygame.init()
+
+# Screen
+WIDTH = 612
+HEIGHT = 608
+
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+
+# Background
+background = pygame.image.load("TTT_board.jpg")
+
+# Title
+pygame.display.set_caption("Tic Tac Toe")
+
+# X
+X_image = pygame.image.load("TTT_X.png")
+
+One = False
+Two = False
+Three = False
+Four = False
+Five = False
+Six = False
+Seven = False
+Eight = False
+Nine = False
+
+class Board_X:
+    def __init__(self, X):
+        self.X = X
+
+    def get_one(self):
+        return screen.blit(X_image, (38, 38))
+
+    def get_two(self):
+        return screen.blit(X_image, (240, 38))
+
+    def get_three(self):
+        return screen.blit(X_image, (442, 38))
+
+    def get_four(self):
+        return screen.blit(X_image, (38, 240))
+
+    def get_five(self):
+        return screen.blit(X_image, (240, 240))
+
+    def get_six(self):
+        return screen.blit(X_image, (442, 240))
+
+    def get_seven(self):
+        return screen.blit(X_image, (38, 442))
+
+    def get_eight(self):
+        return screen.blit(X_image, (240, 442))
+
+    def get_nine(self):
+        return screen.blit(X_image, (442, 442))
+
+X_board = Board_X(X_image)
+
+# Icon
+icon = pygame.image.load("TTT_X.png")
+pygame.display.set_icon(icon)
+
+# O
+O_image = pygame.image.load("TTT_O.png")
+
+one = False
+two = False
+three = False
+four = False
+five = False
+six = False
+seven = False
+eight = False
+nine = False
+
+class Board_O:
+    def __init__(self, O):
+        self.O = O
+
+    def get_one(self):
+        return screen.blit(O_image, (38, 38))
+
+    def get_two(self):
+        return screen.blit(O_image, (240, 38))
+
+    def get_three(self):
+        return screen.blit(O_image, (442, 38))
+
+    def get_four(self):
+        return screen.blit(O_image, (38, 240))
+
+    def get_five(self):
+        return screen.blit(O_image, (240, 240))
+
+    def get_six(self):
+        return screen.blit(O_image, (442, 240))
+
+    def get_seven(self):
+        return screen.blit(O_image, (38, 442))
+
+    def get_eight(self):
+        return screen.blit(O_image, (240, 442))
+
+    def get_nine(self):
+        return screen.blit(O_image, (442, 442))
+
+O_board = Board_O(O_image)
+
+# Allower
+al_1 = "l"
+al_2 = "l"
+al_3 = "l"
+al_4 = "l"
+al_5 = "l"
+al_6 = "l"
+al_7 = "l"
+al_8 = "l"
+al_9 = "l"
+al_10 = "l"
+al_11 = "l"
+al_12 = "l"
+al_13 = "l"
+al_14 = "l"
+al_15 = "l"
+al_16 = "l"
+al_17 = "l"
+al_18 = "l"
+
+queue = 1
+
+mouse_allower = True
+
+# X Winning / O Winning
+
+shrift = pygame.font.Font("freesansbold.ttf", 64)
+
+def X_Win():
+    win_text = shrift.render("X Wins!", True, (100, 220, 100))
+    screen.blit(win_text, (200, 250))
+
+def O_Win():
+    win_text = shrift.render("O Wins!", True, (100, 220, 100))
+    screen.blit(win_text, (200, 250))
+
+X_win = True
+O_win = True
+
+
+running = True
+while running:
+    screen.blit(background, (0, 0))
+
+    x, y = pygame.mouse.get_pos()
+
+    click_sound = pygame.mixer.Sound("TTT_sound.wav")
+    Win_sound = pygame.mixer.Sound("TTT_win.wav")
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+        if queue:
+            if event.type == pygame.MOUSEBUTTONDOWN and mouse_allower:
+                click_sound.play()
+                if One != "not" and al_1 != "n" and x < 210 and y > 38 and y < 210:
+                    One = "True"
+                    one = "not"
+                    al_1 = "n"
+                    queue = 0
+
+                if Two != "not" and al_2 != "n" and x > 220 and x < 412 and y > 38 and y < 210:
+                    Two = "True"
+                    two = "not"
+                    al_2 = "n"
+                    queue = 0
+
+                if Three != "not" and al_3 != "n" and x > 422 and y > 38 and y < 210:
+                    Three = "True"
+                    three = "not"
+                    al_3 = "n"
+                    queue = 0
+
+                if Four != "not" and al_4 != "n" and x < 210 and y > 220 and y < 422:
+                    Four = "True"
+                    four = "not"
+                    al_4 = "n"
+                    queue = 0
+
+                if Five != "not" and al_5 != "n" and x > 220 and x < 412 and y > 220 and y < 412:
+                    Five = "True"
+                    five = "not"
+                    al_5 = "n"
+                    queue = 0
+
+                if Six != "not" and al_6 != "n" and x > 422 and y > 220 and y < 412:
+                    Six = "True"
+                    six = "not"
+                    al_6 = "n"
+                    queue = 0
+
+                if Seven != "not" and al_7 != "n" and x < 210 and y > 422:
+                    Seven = "True"
+                    seven = "not"
+                    al_7 = "n"
+                    queue = 0
+
+                if Eight != "not" and al_8 != "n" and x > 220 and x < 412 and y > 422:
+                    Eight = "True"
+                    eight = "not"
+                    al_8 = "n"
+                    queue = 0
+
+                if Nine != "not" and al_9 != "n" and x > 422 and y > 422:
+                    Nine = "True"
+                    nine = "not"
+                    al_9 = "n"
+                    queue = 0
+
+        if not queue:
+            if event.type == pygame.MOUSEBUTTONDOWN and mouse_allower:
+                click_sound.play()
+                if one != "not" and al_10 != "n" and x < 210 and y > 38 and y < 210:
+                    one = "True"
+                    One = "not"
+                    al_10 = "n"
+                    queue = 1
+
+                if two != "not" and al_11 != "n" and x > 220 and x < 412 and y > 38 and y < 210:
+                    two = "True"
+                    Two = "not"
+                    al_11 = "n"
+                    queue = 1
+
+                if three != "not" and al_12 != "n" and x > 422 and y > 38 and y < 210:
+                    three = "True"
+                    Three = "not"
+                    al_12 = "n"
+                    queue = 1
+
+                if four != "not" and al_13 != "n" and x < 210 and y > 220 and y < 422:
+                    four = "True"
+                    Four = "not"
+                    al_13 = "n"
+                    queue = 1
+
+                if five != "not" and al_14 != "n" and x > 220 and x < 412 and y > 220 and y < 412:
+                    five = "True"
+                    Five = "not"
+                    al_14 = "n"
+                    queue = 1
+
+                if six != "not" and al_15 != "n" and x > 422 and y > 220 and y < 412:
+                    six = "True"
+                    Six = "not"
+                    al_15 = "n"
+                    queue = 1
+
+                if seven != "not" and al_16 != "n" and x < 210 and y > 422:
+                    seven = "True"
+                    Seven = "not"
+                    al_16 = "n"
+                    queue = 1
+
+                if eight != "not" and al_17 != "n" and x > 220 and x < 412 and y > 422:
+                    eight = "True"
+                    Eight = "not"
+                    al_17 = "n"
+                    queue = 1
+
+                if nine != "not" and al_18 != "n" and x > 422 and y > 422:
+                    nine = "True"
+                    Nine = "not"
+                    al_18 = "n"
+                    queue = 1
+
+    if One == "True":
+        X_board.get_one()
+
+    if Two == "True":
+        X_board.get_two()
+
+    if Three == "True":
+        X_board.get_three()
+
+    if Four == "True":
+        X_board.get_four()
+
+    if Five == "True":
+        X_board.get_five()
+
+    if Six == "True":
+        X_board.get_six()
+
+    if Seven == "True":
+        X_board.get_seven()
+
+    if Eight == "True":
+        X_board.get_eight()
+
+    if Nine == "True":
+        X_board.get_nine()
+
+    if one == "True":
+        O_board.get_one()
+
+    if two == "True":
+        O_board.get_two()
+
+    if three == "True":
+        O_board.get_three()
+
+    if four == "True":
+        O_board.get_four()
+
+    if five == "True":
+        O_board.get_five()
+
+    if six == "True":
+        O_board.get_six()
+
+    if seven == "True":
+        O_board.get_seven()
+
+    if eight == "True":
+        O_board.get_eight()
+
+    if nine == "True":
+        O_board.get_nine()
+
+
+    if One == "True" and Two == "True" and Three == "True" or One == "True" and Four == "True" and Seven == "True" or One == "True" and Five == "True" and Nine == "True" or Two == "True" and Five == "True" and Eight == "True" or Three == "True" and Six == "True" and Nine == "True" or Three == "True" and Five == "True" and Seven == "True" or Four == "True" and Five == "True" and Six == "True" or Seven == "True" and Eight == "True" and Nine == "True":
+        X_Win()
+        mouse_allower = False
+        if X_win:
+            Win_sound.play()
+            X_win = False
+
+    elif one == "True" and two == "True" and three == "True" or one == "True" and four == "True" and seven == "True" or one == "True" and five == "True" and nine == "True" or two == "True" and five == "True" and eight == "True" or three == "True" and six == "True" and nine == "True" or three == "True" and five == "True" and seven == "True" or four == "True" and five == "True" and six == "True" or seven == "True" and eight == "True" and nine == "True":
+        O_Win()
+        mouse_allower = False
+        if O_win:
+            Win_sound.play()
+            O_win = False
+
+    pygame.display.update()
